@@ -12,8 +12,11 @@
   JavaScript file (such as htmx), which needs a conversation first.
 - **Database:** Postgres 17 with the shared schema from tadmor's
   `db/migrations/`, through PHP's `pdo_pgsql` extension.
-- **Runtime:** PHP 8.4 from Debian 13, with its extensions and Composer
-  also from Debian (the OS is out of scope for the metrics).
+- **Runtime:** PHP from the operating system's packages, with its
+  extensions and Composer (the OS is out of scope for the metrics):
+  PHP 8.4 on the Debian 13 deployment box, PHP 8.5 on the Ubuntu 26.04
+  development machine. Dependencies are resolved for 8.4 (below), so
+  everything locked runs on both.
 
 ## Why Laravel
 
@@ -22,20 +25,20 @@ counterpart measures what mainstream PHP actually costs. That makes it a
 useful contrast to tadmor-python, where the mainstream framework (Django)
 happened to cost almost nothing.
 
-Here it does not. Resolved from Packagist on 2026-10-03 for
-`laravel/framework` 13.34 on PHP 8.4, the runtime closure is:
+Here it does not. As locked on 2026-10-03 (`laravel/framework` 13.33.0,
+resolved for PHP 8.4), the runtime closure is:
 
 | | Packages | Vendors | Packagist maintainer accounts |
 | --- | ---: | ---: | ---: |
-| `laravel/framework` | **71** | 21 | **36** |
+| `laravel/framework` | **73** | 22 | **37** |
 
 - **Symfony:** 32 packages (console, http-kernel, routing, mailer, mime,
   translation, var-dumper, 11 polyfills, and others), one account.
 - **PSR interfaces:** 8 small packages, mostly the PHP-FIG account.
 - **About 20 independent maintainers** for the rest: Guzzle (5 accounts),
-  Carbon, ramsey/uuid, Flysystem, CommonMark, Monolog, phpdotenv,
-  brick/math, Termwind, cron-expression, email-validator, portable-ascii,
-  and so on.
+  Carbon, ramsey/uuid, Flysystem, CommonMark (with nette/schema and
+  nette/utils), Monolog, phpdotenv, brick/math, Termwind, cron-expression,
+  email-validator, portable-ascii, and so on.
 
 Most of that tree is code tadmor will never call (an HTTP client, cloud
 filesystems, Markdown, a terminal UI). It cannot be trimmed:
@@ -89,7 +92,7 @@ it. Its tree is test-only:
 | | Packages | Vendors | Packagist maintainer accounts |
 | --- | ---: | ---: | ---: |
 | `phpunit/phpunit` 12.5 | 25 | 7 | 6 |
-| with `laravel/framework`, everything | 96 | 28 | 41 |
+| with `laravel/framework`, everything | 98 | 29 | 42 |
 
 Nearly all of it is Sebastian Bergmann's (`phpunit/*`, `sebastian/*`,
 `phar-io/*` jointly with Arne Blankerts' `theseer`); the others are
@@ -114,16 +117,59 @@ deploy time, offline from the committed lock and `vendor/`).
 - **No install-time code.** Composer always runs with `--no-scripts
   --no-plugins`, and `composer.json` sets `"allow-plugins": false`.
 - **Cooldown.** No version published less than 7 days ago, as tadmor's
-  pnpm policy does. (On 2026-10-03, 13.34.0 was only four days old.)
+  pnpm policy does. Composer has no such setting, so `tools/vendor.php
+  update` (standard library only) re-resolves, excluding each too-recent
+  version Composer picked, until every locked version is old enough; a
+  root pin that is too recent is an error. (On 2026-10-03 that kept back
+  `laravel/framework` 13.34.0 and recent releases of Carbon, Monolog,
+  doctrine/lexer, and two Symfony components.) `tools/vendor.php check`
+  verifies offline that `composer.json` pins exact versions, that the lock
+  matches it, and that `vendor/` holds exactly the locked versions.
 - **Hermetic build.** There is no build step: the deployable is the source
   tree plus `vendor/`. A clean clone runs offline with only the PHP
   toolchain (level 3 of tadmor's ladder), and since nothing is compiled or
   bundled, two checkouts of a commit are byte-identical deployables.
   Laravel's cached config, routes, and views are generated at deploy time,
   not committed.
-- **Toolchain:** PHP 8.4 (`^8.3` is Laravel's floor) with the extensions
-  Laravel requires (ctype, filter, hash, mbstring, openssl, session,
-  tokenizer) plus pdo_pgsql, all Debian packages.
+- **Toolchain:** PHP 8.4 or later (`^8.3` is Laravel's floor) with the
+  extensions Laravel requires (ctype, filter, hash, mbstring, openssl,
+  session, tokenizer) plus pdo_pgsql, all OS packages: on Ubuntu,
+  `php8.5-cli php8.5-pgsql php8.5-mbstring php8.5-xml composer`.
+  `composer.json` sets `config.platform.php` to Debian 13's 8.4.24, so
+  Composer resolves for the deployment box whatever PHP runs it.
+- **Serving.** Development and the conformance suite use PHP's built-in
+  web server (`tools/serve.sh`) with Laravel's router script, which needs
+  no package. Production runs php-fpm behind the web server, both OS
+  packages.
+
+## How the application uses Laravel
+
+- **No skeleton.** The app is the handful of files Laravel 13 needs
+  (`artisan`, `bootstrap/app.php`, `public/index.php`, `routes/`, and the
+  few `config/` files that override the framework's defaults); the
+  framework supplies the rest of its configuration.
+- **No framework middleware on the API.** `bootstrap/app.php` routes the
+  probes and `/api/` without the `web` or `api` groups: no Laravel
+  session, cookie encryption, or CSRF token. Every `/api/` error, unknown
+  paths included, renders as `{"error": "..."}` there too.
+- **Our own sessions.** `app/Services/Sessions.php` keeps sessions in the
+  shared `sessions` table (SHA-256 of a random token, fixed 30 days), and
+  the `authenticated` middleware re-reads the user on every request.
+  Laravel's session, cache, and queue are set to in-memory drivers so the
+  framework never wants tables of its own. Passwords are hashed with
+  Laravel's Hash (argon2id).
+- **Business rules in `app/Services/`**, raising `App\Errors\ApiError`
+  with the HTTP status, shared by the JSON API and the UI. Eloquent models
+  in `app/Models/` map the shared tables.
+- **Commands.** `artisan tadmor:migrate` applies the shared migrations,
+  `tadmor:adduser` bootstraps an administrator (password on stdin), and
+  `tadmor:resetdb` wipes a database whose name ends in `_test` or
+  `_conformance`. PHP serves each request in a fresh process, so unlike
+  tadmor the server does not migrate on start: `make run` migrates first,
+  and deployment runs `tadmor:migrate`.
+- **Tests.** PHPUnit with Laravel's testing helpers. The first test wipes
+  the `_test` database and applies the migrations; each test then runs in
+  a transaction that is rolled back.
 
 ## Consequences for the shared schema
 

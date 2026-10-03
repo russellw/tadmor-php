@@ -21,8 +21,14 @@ first. vendor/ is committed; Composer runs only with --no-scripts --no-plugins, 
 nothing is installed from Packagist at build or run time.
 
 Working on it:
+Business rules live in app/Services/, shared by the JSON API (app/Http/Controllers/Api/)
+and the HTML UI. Never put a rule in a controller.
 spec/, conformance/, and db/migrations/ are copies from tadmor (spec/UPSTREAM);
 never edit them here. Re-export from tadmor with spec/export.sh.
+Change dependencies only through `make vendor-update` (tools/vendor.php), never by
+running composer directly.
+Before committing, run `make check`, `make test`, and `make conformance`; all must pass
+except conformance cases for endpoints not yet built.
 
 Version control:
 Commit directly to the default branch. Do not create feature branches.
