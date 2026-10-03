@@ -16,7 +16,7 @@ it as it is; Laravel's own migration system is not used for it.
 Dependencies:
 Supply-chain conscious throughout; keep the third-party footprint small, pinned, and
 reviewable in-repo. The only permitted third-party packages are laravel/framework and
-the tree it requires, as described in docs/stack.md. New packages need a conversation
+the tree it requires, plus phpunit/phpunit for tests, as described in docs/stack.md. New packages need a conversation
 first. vendor/ is committed; Composer runs only with --no-scripts --no-plugins, and
 nothing is installed from Packagist at build or run time.
 

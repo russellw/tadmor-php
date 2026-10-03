@@ -66,8 +66,9 @@ allows server-rendered pages; the JSON API remains mandatory alongside them.
 
 ## Permitted packages
 
-`laravel/framework` and exactly the transitive tree it requires, as locked
-in `composer.lock`, and nothing else without a conversation first. In
+`laravel/framework` and exactly the transitive tree it requires, plus
+`phpunit/phpunit` and its tree as a dev dependency, as locked in
+`composer.lock`, and nothing else without a conversation first. In
 particular:
 
 - **Not the `laravel/laravel` skeleton's extras.** No tinker, pint, sail,
@@ -76,9 +77,30 @@ particular:
 - **No Laravel first-party add-ons** (Sanctum, Breeze, Fortify, Horizon,
   and so on). Sessions and authentication are our own, over the shared
   `users` and `sessions` tables, as in tadmor.
-- **Testing is undecided.** Laravel's testing helpers build on PHPUnit
-  (25 packages, 6 accounts, test-only). Whether to take it or write a
-  small runner of our own is decided at scaffolding, in a conversation.
+- **No Pest, Mockery, or Faker.** Plain PHPUnit with Laravel's testing
+  helpers is enough.
+
+## Testing
+
+PHPUnit 12, the version the Laravel 13 skeleton targets, with Laravel's
+built-in testing helpers (`Illuminate\Foundation\Testing`), which build on
+it. Its tree is test-only:
+
+| | Packages | Vendors | Packagist maintainer accounts |
+| --- | ---: | ---: | ---: |
+| `phpunit/phpunit` 12.5 | 25 | 7 | 6 |
+| with `laravel/framework`, everything | 96 | 28 | 41 |
+
+Nearly all of it is Sebastian Bergmann's (`phpunit/*`, `sebastian/*`,
+`phar-io/*` jointly with Arne Blankerts' `theseer`); the others are
+nikic/php-parser, myclabs/deep-copy, and staabm/side-effects-detector.
+The alternative, a small runner of our own, was rejected: Laravel's
+testing helpers assume PHPUnit, and this counterpart measures Laravel as
+people use it.
+
+It is a `require-dev` dependency, so it is vendored and committed with
+the rest but left out of the deployable (`composer install --no-dev` at
+deploy time, offline from the committed lock and `vendor/`).
 
 ## Supply-chain posture
 
