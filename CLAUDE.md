@@ -22,7 +22,8 @@ nothing is installed from Packagist at build or run time.
 
 Working on it:
 Business rules live in app/Services/, shared by the JSON API (app/Http/Controllers/Api/)
-and the HTML UI. Never put a rule in a controller.
+and the HTML UI (app/Http/Controllers/Ui/). Never put a rule in a controller.
+The Content Security Policy forbids inline styles and scripts; use public/app.css and app.js.
 spec/, conformance/, and db/migrations/ are copies from tadmor (spec/UPSTREAM);
 never edit them here. Re-export from tadmor with spec/export.sh.
 Change dependencies only through `make vendor-update` (tools/vendor.php), never by

@@ -45,6 +45,12 @@ final class Body
         return new self(get_object_vars($data));
     }
 
+    /** The same body with some fields replaced. */
+    public function with(array $fields): self
+    {
+        return new self(array_merge($this->data, $fields));
+    }
+
     public function has(string $name): bool
     {
         return ($this->data[$name] ?? null) !== null;

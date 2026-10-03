@@ -9,10 +9,13 @@ supply-chain posture.
 ## Layout
 
 ```
-app/               the application: Services (business rules), Http (API), Printing (PDF), Console
+app/               the application: Services (business rules), Http (API and UI controllers),
+                   Ui (form and list helpers), Printing (PDF), Console
 bootstrap/app.php  Laravel's application setup: routing, middleware, error rendering
 config/            the few settings that differ from Laravel's defaults
-routes/            probes.php (/healthz, /readyz) and api.php (/api/...)
+resources/views/   Blade templates for the UI
+public/            index.php, plus the UI's one stylesheet and one script
+routes/            probes.php (/healthz, /readyz), api.php (/api/...), web*.php (the UI)
 tests/             PHPUnit tests
 tools/             vendor.php (dependencies), serve.sh, conformance.sh
 vendor/            all third-party source, committed (tools/vendor.php check)
@@ -32,7 +35,7 @@ spec/, conformance/, db/migrations/   copies from tadmor; never edited here
 There is no build step. Run `make` to list targets:
 
 ```sh
-make run          # migrate, then serve on HTTP_ADDR (default 127.0.0.1:8080)
+make run          # migrate, then serve the UI and API on HTTP_ADDR (default 127.0.0.1:8080)
 make adduser EMAIL=you@example.com NAME='Your Name'   # password on stdin
 make test         # PHPUnit (wipes tadmor_php_test)
 make conformance  # tadmor's suite against a fresh server (wipes tadmor_php_conformance)

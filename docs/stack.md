@@ -180,6 +180,23 @@ deploy time, offline from the committed lock and `vendor/`).
   the shared document form. Email goes through Laravel's mailer (Symfony
   Mailer, already in the tree) when `SMTP_ADDR` is set, and is otherwise
   refused with 501.
+- **The UI is Blade over the same services.** `routes/web.php` and the
+  controllers in `app/Http/Controllers/Ui/` render server-side pages for
+  every item of `spec/domain.md` §13; forms post plain HTML fields, which
+  `app/Ui/Form.php` turns into the API's request-body shape, so the UI
+  shows exactly the API's rules and messages (G5). Each action runs in one
+  transaction (`App\Ui\Ui::attempt`).
+- **No Laravel session or CSRF middleware in the UI either.** The UI uses
+  the same login session as the API, and every form carries a token that
+  is an HMAC of that session's token, checked on each POST
+  (`App\Http\Middleware\UiSession`), so no `APP_KEY` or session store is
+  needed. Sign-in itself has no session to tie a token to; the cookie's
+  `SameSite=Lax` covers it.
+- **One script and one stylesheet,** `public/app.js` and `public/app.css`,
+  taken unchanged from tadmor-python apart from a few utility classes: the
+  line-item editor previews totals with exact BigInt arithmetic rounded as
+  the server rounds. A same-origin Content Security Policy is set on every
+  page, so templates use no inline styles or scripts.
 - **Commands.** `artisan tadmor:migrate` applies the shared migrations,
   `tadmor:adduser` bootstraps an administrator (password on stdin), and
   `tadmor:resetdb` wipes a database whose name ends in `_test` or
@@ -206,5 +223,5 @@ in `schema_migrations`).
   tree dominating in a way that undermines the exercise, a second PHP
   counterpart on Symfony components (`tadmor-php-symfony`) is the natural
   follow-up.
-- **A richer client.** If more than a screen or two needs client-side
+- **A richer client.** If more than the line editor needs client-side
   behaviour, htmx is the first candidate to discuss.

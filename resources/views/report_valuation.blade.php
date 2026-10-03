@@ -1,0 +1,12 @@
+@extends('layout')
+@section('content')
+<div class="pagehead"><h1>Inventory valuation</h1></div>
+<div class="tablewrap"><table class="grid">
+  <thead><tr><th>SKU</th><th>Product</th><th class="num">Quantity on hand</th><th class="num">Average unit cost</th><th class="num">Value on hand</th></tr></thead>
+  <tbody>@forelse ($rows as $r)<tr><td>{{ $r['sku'] }}</td><td>{{ $r['name'] }}</td><td class="num">@qty($r['qty_on_hand'])</td>
+    <td class="num">@amount($r['avg_unit_cost'])</td><td class="num">@amount($r['value_on_hand'])</td></tr>
+  @empty<tr><td colspan="5" class="muted">No stock movements yet.</td></tr>@endforelse</tbody>
+  <tfoot><tr><td colspan="4">Total value</td><td class="num">@amount($total)</td></tr></tfoot>
+</table></div>
+<p class="muted">Across all warehouses and all movements, posted or not, in the base currency.</p>
+@endsection

@@ -4,6 +4,8 @@ use App\Errors\ApiError;
 use App\Errors\DatabaseErrors;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\RequireAdmin;
+use App\Http\Middleware\SecurityHeaders;
+use App\Http\Middleware\UiSession;
 use App\Http\Middleware\Transaction;
 use App\Services\Sessions;
 use Illuminate\Foundation\Application;
@@ -23,20 +25,28 @@ return Application::configure(basePath: dirname(__DIR__))
             // its own session (app/Services/Sessions.php).
             Route::group([], base_path('routes/probes.php'));
             Route::prefix('api')->middleware(Transaction::class)->group(base_path('routes/api.php'));
+            Route::middleware(SecurityHeaders::class)->group(base_path('routes/web.php'));
         },
         commands: __DIR__.'/../routes/console.php',
     )
     ->withCommands()
+    ->withProviders([App\Providers\AppServiceProvider::class])
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias(['authenticated' => Authenticate::class, 'admin' => RequireAdmin::class]);
+        $middleware->alias(['authenticated' => Authenticate::class, 'admin' => RequireAdmin::class, 'ui' => UiSession::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->dontReport(ApiError::class);
 
-        // Every error under /api/ is {"error": "..."} (spec/api.md §1.4).
+        // Every error under /api/ is {"error": "..."} (spec/api.md §1.4); the UI shows
+        // a refusal that escapes a page as a message page with its status.
         $exceptions->render(function (Throwable $e, Request $request) {
             if (! $request->is('api', 'api/*')) {
-                return null;
+                if ($e instanceof ApiError && in_array($e->status, [403, 404], true)) {
+                    return response()->view('message', $e->status === 404 ? [] :
+                        ['title' => 'Administrators only', 'message' => 'This page is for administrators.'], $e->status);
+                }
+
+                return $e instanceof NotFoundHttpException ? response()->view('message', [], 404) : null;
             }
             if ($e instanceof NotFoundHttpException || $e instanceof MethodNotAllowedHttpException) {
                 // Authentication wraps the whole API, unknown paths included.
