@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Errors\ApiError;
 use App\Http\Api;
+use App\Http\Body;
 use App\Services\Sessions;
 use App\Services\Users;
 use Illuminate\Http\JsonResponse;
@@ -15,9 +16,9 @@ class AuthController
 {
     public function login(Request $request): JsonResponse
     {
-        $body = Api::body($request);
-        $email = is_string($body['email'] ?? null) ? trim($body['email']) : '';
-        $password = is_string($body['password'] ?? null) ? $body['password'] : '';
+        $body = Body::from($request);
+        $email = trim($body->str('email') ?? '');
+        $password = $body->str('password') ?? '';
         if ($email === '' || $password === '') {
             throw new ApiError(400, 'email and password are required');
         }

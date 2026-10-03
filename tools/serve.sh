@@ -12,4 +12,4 @@ cd "$repo_root/public"
 
 # Several workers, so one slow request (a password hash) does not stall the rest.
 export PHP_CLI_SERVER_WORKERS="${PHP_CLI_SERVER_WORKERS:-4}"
-exec php -S "${1:-127.0.0.1:8080}" "$repo_root/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php"
+exec php -d opcache.enable_cli=1 -S "${1:-127.0.0.1:8080}" "$repo_root/vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php"

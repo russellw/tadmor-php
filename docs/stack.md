@@ -159,8 +159,27 @@ deploy time, offline from the committed lock and `vendor/`).
   framework never wants tables of its own. Passwords are hashed with
   Laravel's Hash (argon2id).
 - **Business rules in `app/Services/`**, raising `App\Errors\ApiError`
-  with the HTTP status, shared by the JSON API and the UI. Eloquent models
-  in `app/Models/` map the shared tables.
+  with the HTTP status, shared by the JSON API and the UI. Database errors
+  the schema raises (unique, foreign-key, check, and trigger violations)
+  map to 409 or 422 by SQLSTATE (`App\Errors\DatabaseErrors`).
+- **Query builder over Eloquent.** Invoices, bills, credit notes, orders,
+  and payments share one code path, parameterized by a kind descriptor
+  (`app/Services/Kinds.php`) that names each kind's tables and columns, and
+  reports are aggregate SQL over the shared views. Laravel's query builder
+  fits that better than a model class per table, so only `User` is an
+  Eloquent model.
+- **One transaction per API request** (`App\Http\Middleware\Transaction`),
+  committed only on success. The schema's deferred constraint triggers fire
+  at commit, and a refusal there is mapped like any other.
+- **Exact decimals with brick/math**, which Laravel already requires, so it
+  adds nothing to the tree. Values are rounded half away from zero to their
+  stored scale on the way in; Laravel's `sum()` aggregate is avoided because
+  it returns floats.
+- **PDFs by hand**, as tadmor and tadmor-python do: `app/Printing/Pdf.php`
+  writes standard-14 Helvetica pages with zlib, and `Printing.php` lays out
+  the shared document form. Email goes through Laravel's mailer (Symfony
+  Mailer, already in the tree) when `SMTP_ADDR` is set, and is otherwise
+  refused with 501.
 - **Commands.** `artisan tadmor:migrate` applies the shared migrations,
   `tadmor:adduser` bootstraps an administrator (password on stdin), and
   `tadmor:resetdb` wipes a database whose name ends in `_test` or

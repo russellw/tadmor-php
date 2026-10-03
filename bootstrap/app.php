@@ -1,10 +1,14 @@
 <?php
 
 use App\Errors\ApiError;
+use App\Errors\DatabaseErrors;
 use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\RequireAdmin;
+use App\Http\Middleware\Transaction;
 use App\Services\Sessions;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,13 +22,13 @@ return Application::configure(basePath: dirname(__DIR__))
             // Laravel session, cookie encryption, or CSRF token. The API has
             // its own session (app/Services/Sessions.php).
             Route::group([], base_path('routes/probes.php'));
-            Route::prefix('api')->group(base_path('routes/api.php'));
+            Route::prefix('api')->middleware(Transaction::class)->group(base_path('routes/api.php'));
         },
         commands: __DIR__.'/../routes/console.php',
     )
     ->withCommands()
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias(['authenticated' => Authenticate::class]);
+        $middleware->alias(['authenticated' => Authenticate::class, 'admin' => RequireAdmin::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->dontReport(ApiError::class);
@@ -39,6 +43,9 @@ return Application::configure(basePath: dirname(__DIR__))
                 $e = Sessions::fromRequest($request) === null
                     ? new ApiError(401, 'not authenticated')
                     : new ApiError(404, 'not found');
+            }
+            if ($e instanceof QueryException) {
+                $e = DatabaseErrors::map($e) ?? $e;
             }
             if ($e instanceof ApiError) {
                 return response()->json(['error' => $e->getMessage()], $e->status);

@@ -9,7 +9,7 @@ supply-chain posture.
 ## Layout
 
 ```
-app/               the application: Services (business rules), Http, Models, Console
+app/               the application: Services (business rules), Http (API), Printing (PDF), Console
 bootstrap/app.php  Laravel's application setup: routing, middleware, error rendering
 config/            the few settings that differ from Laravel's defaults
 routes/            probes.php (/healthz, /readyz) and api.php (/api/...)
