@@ -17,7 +17,7 @@ resources/views/   Blade templates for the UI
 public/            index.php, plus the UI's one stylesheet and one script
 routes/            probes.php (/healthz, /readyz), api.php (/api/...), web*.php (the UI)
 tests/             PHPUnit tests
-tools/             vendor.php (dependencies), serve.sh, conformance.sh
+tools/             vendor.php (dependencies, dependencies.json), serve.sh, conformance.sh
 vendor/            all third-party source, committed (tools/vendor.php check)
 spec/, conformance/, db/migrations/   copies from tadmor; never edited here
 ```

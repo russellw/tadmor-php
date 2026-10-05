@@ -1,0 +1,1037 @@
+{
+    "format": "tadmor-dependencies/1",
+    "generator": "tools/vendor.php manifest (tadmor-php)",
+    "platform": "linux/x64",
+    "toolchains": [
+        "PHP (the operating system's build)",
+        "Composer (the operating system's package)"
+    ],
+    "packages": [
+        {
+            "ecosystem": "packagist",
+            "name": "brick/math",
+            "version": "1.0.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:BenMorel"
+            ],
+            "evidence": "https://packagist.org/packages/brick/math.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "carbonphp/carbon-doctrine-types",
+            "version": "3.2.1",
+            "category": "runtime",
+            "identities": [
+                "packagist:kylekatarn"
+            ],
+            "evidence": "https://packagist.org/packages/carbonphp/carbon-doctrine-types.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "dflydev/dot-access-data",
+            "version": "v3.0.3",
+            "category": "runtime",
+            "identities": [
+                "packagist:simensen"
+            ],
+            "evidence": "https://packagist.org/packages/dflydev/dot-access-data.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "doctrine/inflector",
+            "version": "2.1.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:beberlei"
+            ],
+            "evidence": "https://packagist.org/packages/doctrine/inflector.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "doctrine/lexer",
+            "version": "3.0.2",
+            "category": "runtime",
+            "identities": [
+                "packagist:beberlei"
+            ],
+            "evidence": "https://packagist.org/packages/doctrine/lexer.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "dragonmantank/cron-expression",
+            "version": "v3.6.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:dragonmantank"
+            ],
+            "evidence": "https://packagist.org/packages/dragonmantank/cron-expression.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "egulias/email-validator",
+            "version": "4.0.4",
+            "category": "runtime",
+            "identities": [
+                "packagist:egulias"
+            ],
+            "evidence": "https://packagist.org/packages/egulias/email-validator.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "fruitcake/php-cors",
+            "version": "v1.4.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:barryvdh"
+            ],
+            "evidence": "https://packagist.org/packages/fruitcake/php-cors.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "graham-campbell/result-type",
+            "version": "v1.2.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:graham-campbell"
+            ],
+            "evidence": "https://packagist.org/packages/graham-campbell/result-type.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "guzzlehttp/guzzle",
+            "version": "8.2.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:Nyholm",
+                "packagist:graham-campbell",
+                "packagist:jeremeamia",
+                "packagist:mark.sagikazar",
+                "packagist:mtdowling"
+            ],
+            "evidence": "https://packagist.org/packages/guzzlehttp/guzzle.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "guzzlehttp/promises",
+            "version": "3.0.2",
+            "category": "runtime",
+            "identities": [
+                "packagist:Nyholm",
+                "packagist:graham-campbell",
+                "packagist:mark.sagikazar",
+                "packagist:mtdowling"
+            ],
+            "evidence": "https://packagist.org/packages/guzzlehttp/promises.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "guzzlehttp/psr7",
+            "version": "3.1.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:Nyholm",
+                "packagist:Tobion",
+                "packagist:graham-campbell",
+                "packagist:jeremeamia",
+                "packagist:mark.sagikazar",
+                "packagist:mtdowling"
+            ],
+            "evidence": "https://packagist.org/packages/guzzlehttp/psr7.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "guzzlehttp/uri-template",
+            "version": "v2.0.1",
+            "category": "runtime",
+            "identities": [
+                "packagist:Nyholm",
+                "packagist:graham-campbell",
+                "packagist:mark.sagikazar"
+            ],
+            "evidence": "https://packagist.org/packages/guzzlehttp/uri-template.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "laravel/framework",
+            "version": "v13.33.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:taylorotwell"
+            ],
+            "evidence": "https://packagist.org/packages/laravel/framework.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "laravel/prompts",
+            "version": "v0.3.24",
+            "category": "runtime",
+            "identities": [
+                "packagist:taylorotwell"
+            ],
+            "evidence": "https://packagist.org/packages/laravel/prompts.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "laravel/serializable-closure",
+            "version": "v2.1.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:taylorotwell"
+            ],
+            "evidence": "https://packagist.org/packages/laravel/serializable-closure.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "league/commonmark",
+            "version": "2.10.3",
+            "category": "runtime",
+            "identities": [
+                "packagist:colinodell",
+                "packagist:frankdejonge"
+            ],
+            "evidence": "https://packagist.org/packages/league/commonmark.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "league/config",
+            "version": "v1.2.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:colinodell"
+            ],
+            "evidence": "https://packagist.org/packages/league/config.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "league/flysystem",
+            "version": "3.36.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:frankdejonge"
+            ],
+            "evidence": "https://packagist.org/packages/league/flysystem.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "league/flysystem-local",
+            "version": "3.35.3",
+            "category": "runtime",
+            "identities": [
+                "packagist:frankdejonge"
+            ],
+            "evidence": "https://packagist.org/packages/league/flysystem-local.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "league/mime-type-detection",
+            "version": "1.17.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:frankdejonge"
+            ],
+            "evidence": "https://packagist.org/packages/league/mime-type-detection.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "league/uri",
+            "version": "7.8.1",
+            "category": "runtime",
+            "identities": [
+                "packagist:nyamsprod"
+            ],
+            "evidence": "https://packagist.org/packages/league/uri.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "league/uri-interfaces",
+            "version": "7.8.1",
+            "category": "runtime",
+            "identities": [
+                "packagist:frankdejonge",
+                "packagist:nyamsprod"
+            ],
+            "evidence": "https://packagist.org/packages/league/uri-interfaces.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "monolog/monolog",
+            "version": "3.12.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:Seldaek"
+            ],
+            "evidence": "https://packagist.org/packages/monolog/monolog.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "nesbot/carbon",
+            "version": "3.14.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:Brian Nesbitt",
+                "packagist:kylekatarn"
+            ],
+            "evidence": "https://packagist.org/packages/nesbot/carbon.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "nette/schema",
+            "version": "v1.3.6",
+            "category": "runtime",
+            "identities": [
+                "packagist:david@grudl.com"
+            ],
+            "evidence": "https://packagist.org/packages/nette/schema.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "nette/utils",
+            "version": "v4.1.5",
+            "category": "runtime",
+            "identities": [
+                "packagist:david@grudl.com"
+            ],
+            "evidence": "https://packagist.org/packages/nette/utils.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "nunomaduro/termwind",
+            "version": "v2.4.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:nunomaduro"
+            ],
+            "evidence": "https://packagist.org/packages/nunomaduro/termwind.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "phpoption/phpoption",
+            "version": "1.10.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:johannes"
+            ],
+            "evidence": "https://packagist.org/packages/phpoption/phpoption.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "psr/clock",
+            "version": "1.0.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:cseufert",
+                "packagist:fig"
+            ],
+            "evidence": "https://packagist.org/packages/psr/clock.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "psr/container",
+            "version": "2.0.2",
+            "category": "runtime",
+            "identities": [
+                "packagist:fig",
+                "packagist:mnapoli",
+                "packagist:mouf"
+            ],
+            "evidence": "https://packagist.org/packages/psr/container.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "psr/event-dispatcher",
+            "version": "1.0.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:Crell",
+                "packagist:WyriHaximus",
+                "packagist:fig"
+            ],
+            "evidence": "https://packagist.org/packages/psr/event-dispatcher.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "psr/http-client",
+            "version": "1.0.3",
+            "category": "runtime",
+            "identities": [
+                "packagist:Nyholm",
+                "packagist:fig"
+            ],
+            "evidence": "https://packagist.org/packages/psr/http-client.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "psr/http-factory",
+            "version": "1.1.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fig",
+                "packagist:shadowhand",
+                "packagist:weierophinney"
+            ],
+            "evidence": "https://packagist.org/packages/psr/http-factory.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "psr/http-message",
+            "version": "2.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fig",
+                "packagist:michaelcullum",
+                "packagist:weierophinney"
+            ],
+            "evidence": "https://packagist.org/packages/psr/http-message.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "psr/log",
+            "version": "3.0.2",
+            "category": "runtime",
+            "identities": [
+                "packagist:Seldaek",
+                "packagist:fig",
+                "packagist:michaelcullum"
+            ],
+            "evidence": "https://packagist.org/packages/psr/log.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "psr/simple-cache",
+            "version": "3.0.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:Seldaek",
+                "packagist:dragoonis",
+                "packagist:fig"
+            ],
+            "evidence": "https://packagist.org/packages/psr/simple-cache.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "ramsey/collection",
+            "version": "2.1.1",
+            "category": "runtime",
+            "identities": [
+                "packagist:ramsey"
+            ],
+            "evidence": "https://packagist.org/packages/ramsey/collection.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "ramsey/uuid",
+            "version": "4.9.4",
+            "category": "runtime",
+            "identities": [
+                "packagist:ramsey"
+            ],
+            "evidence": "https://packagist.org/packages/ramsey/uuid.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/clock",
+            "version": "v8.1.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/clock.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/console",
+            "version": "v8.1.8",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/console.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/css-selector",
+            "version": "v8.1.6",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/css-selector.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/deprecation-contracts",
+            "version": "v3.7.1",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/deprecation-contracts.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/error-handler",
+            "version": "v8.1.8",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/error-handler.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/event-dispatcher",
+            "version": "v8.1.5",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/event-dispatcher.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/event-dispatcher-contracts",
+            "version": "v3.7.1",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/event-dispatcher-contracts.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/finder",
+            "version": "v8.1.8",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/finder.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/http-foundation",
+            "version": "v8.1.8",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/http-foundation.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/http-kernel",
+            "version": "v8.1.7",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/http-kernel.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/mailer",
+            "version": "v8.1.7",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/mailer.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/mime",
+            "version": "v8.1.7",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/mime.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.37.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/polyfill-ctype.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/polyfill-intl-grapheme",
+            "version": "v1.43.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/polyfill-intl-grapheme.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/polyfill-intl-idn",
+            "version": "v1.43.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/polyfill-intl-idn.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/polyfill-intl-normalizer",
+            "version": "v1.43.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/polyfill-intl-normalizer.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.43.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/polyfill-mbstring.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/polyfill-php80",
+            "version": "v1.43.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/polyfill-php80.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/polyfill-php82",
+            "version": "v1.43.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/polyfill-php82.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/polyfill-php84",
+            "version": "v1.43.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/polyfill-php84.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/polyfill-php85",
+            "version": "v1.43.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/polyfill-php85.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/polyfill-php86",
+            "version": "v1.43.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/polyfill-php86.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/polyfill-uuid",
+            "version": "v1.43.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/polyfill-uuid.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/process",
+            "version": "v8.1.7",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/process.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/routing",
+            "version": "v8.1.6",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/routing.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/service-contracts",
+            "version": "v3.7.3",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/service-contracts.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/string",
+            "version": "v8.1.7",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/string.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/translation",
+            "version": "v8.1.5",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/translation.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/translation-contracts",
+            "version": "v3.7.1",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/translation-contracts.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/uid",
+            "version": "v8.1.8",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/uid.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "symfony/var-dumper",
+            "version": "v8.1.7",
+            "category": "runtime",
+            "identities": [
+                "packagist:fabpot"
+            ],
+            "evidence": "https://packagist.org/packages/symfony/var-dumper.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "tijsverkoyen/css-to-inline-styles",
+            "version": "v2.4.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:tijsverkoyen"
+            ],
+            "evidence": "https://packagist.org/packages/tijsverkoyen/css-to-inline-styles.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "vlucas/phpdotenv",
+            "version": "v5.7.0",
+            "category": "runtime",
+            "identities": [
+                "packagist:vlucas"
+            ],
+            "evidence": "https://packagist.org/packages/vlucas/phpdotenv.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "voku/portable-ascii",
+            "version": "2.1.1",
+            "category": "runtime",
+            "identities": [
+                "packagist:voku"
+            ],
+            "evidence": "https://packagist.org/packages/voku/portable-ascii.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "myclabs/deep-copy",
+            "version": "1.14.0",
+            "category": "test",
+            "identities": [
+                "packagist:mnapoli",
+                "packagist:myclabs"
+            ],
+            "evidence": "https://packagist.org/packages/myclabs/deep-copy.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "nikic/php-parser",
+            "version": "v5.9.0",
+            "category": "test",
+            "identities": [
+                "packagist:nikic"
+            ],
+            "evidence": "https://packagist.org/packages/nikic/php-parser.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "phar-io/manifest",
+            "version": "2.0.4",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian",
+                "packagist:theseer"
+            ],
+            "evidence": "https://packagist.org/packages/phar-io/manifest.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "phar-io/version",
+            "version": "3.2.1",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian",
+                "packagist:theseer"
+            ],
+            "evidence": "https://packagist.org/packages/phar-io/version.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "phpunit/php-code-coverage",
+            "version": "12.5.7",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/phpunit/php-code-coverage.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "phpunit/php-file-iterator",
+            "version": "6.0.2",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/phpunit/php-file-iterator.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "phpunit/php-invoker",
+            "version": "6.0.0",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/phpunit/php-invoker.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "phpunit/php-text-template",
+            "version": "5.0.0",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/phpunit/php-text-template.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "phpunit/php-timer",
+            "version": "8.0.0",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/phpunit/php-timer.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "phpunit/phpunit",
+            "version": "12.5.36",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/phpunit/phpunit.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/cli-parser",
+            "version": "4.2.1",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/cli-parser.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/comparator",
+            "version": "7.1.8",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/comparator.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/complexity",
+            "version": "5.0.0",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/complexity.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/diff",
+            "version": "7.0.1",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/diff.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/environment",
+            "version": "8.1.2",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/environment.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/exporter",
+            "version": "7.0.3",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/exporter.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/global-state",
+            "version": "8.0.3",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/global-state.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/lines-of-code",
+            "version": "4.0.1",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/lines-of-code.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/object-enumerator",
+            "version": "7.0.0",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/object-enumerator.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/object-reflector",
+            "version": "5.0.0",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/object-reflector.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/recursion-context",
+            "version": "7.0.1",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/recursion-context.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/type",
+            "version": "6.0.4",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/type.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "sebastian/version",
+            "version": "6.0.0",
+            "category": "test",
+            "identities": [
+                "packagist:sebastian"
+            ],
+            "evidence": "https://packagist.org/packages/sebastian/version.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "staabm/side-effects-detector",
+            "version": "1.0.5",
+            "category": "test",
+            "identities": [
+                "packagist:staabm"
+            ],
+            "evidence": "https://packagist.org/packages/staabm/side-effects-detector.json"
+        },
+        {
+            "ecosystem": "packagist",
+            "name": "theseer/tokenizer",
+            "version": "2.0.1",
+            "category": "test",
+            "identities": [
+                "packagist:theseer"
+            ],
+            "evidence": "https://packagist.org/packages/theseer/tokenizer.json"
+        }
+    ],
+    "sources": [
+        {
+            "label": "Composer vendor/ (runtime)",
+            "bytes": 23150179,
+            "lines": 563980
+        },
+        {
+            "label": "Composer vendor/ (test)",
+            "bytes": 6201582,
+            "lines": 120524
+        }
+    ]
+}

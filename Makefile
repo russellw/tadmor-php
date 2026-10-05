@@ -37,7 +37,7 @@ check: vendor-check ## Lint every PHP file and check the vendor tree
 	@find app bootstrap config public routes tests tools -name '*.php' -print0 | \
 		xargs -0 -n1 $(PHP) -l -d display_errors=stderr >/dev/null
 
-vendor-check: ## Verify vendor/ matches composer.json and composer.lock (offline)
+vendor-check: ## Verify vendor/ and dependencies.json against composer.json and composer.lock (offline)
 	$(PHP) tools/vendor.php check
 
 vendor-update: ## Re-resolve dependencies under the 7-day cooldown and install them (network)

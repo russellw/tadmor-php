@@ -5,8 +5,15 @@
 //                                 the 7-day cooldown, then install into vendor/.
 //                                 Needs the network.
 //   php tools/vendor.php check    Verify, offline, that composer.json pins exact
-//                                 versions, that composer.lock matches it, and
-//                                 that vendor/ holds exactly the locked versions.
+//                                 versions, that composer.lock matches it, that
+//                                 vendor/ holds exactly the locked versions, and
+//                                 that dependencies.json lists exactly them.
+//   php tools/vendor.php manifest Write dependencies.json, the dependency
+//                                 manifest tadmor's tools/measure.py reads
+//                                 (tadmor's docs/counterpart-metrics.md): every
+//                                 locked package, its category, and its
+//                                 Packagist maintainers. Needs the network;
+//                                 update runs it.
 //
 // Composer runs only with --no-scripts --no-plugins. The cooldown: no package
 // version published less than COOLDOWN_DAYS ago is locked. Composer has no such
@@ -95,7 +102,76 @@ function update(): void
     }
 
     composer(['install']);
+    manifest();
     check();
+}
+
+/**
+ * The category of each locked package: the runtime tree is runtime, and the
+ * dev tree, which is PHPUnit's (docs/stack.md, "Testing"), is test.
+ *
+ * @return array<string, array{version: string, category: string}>
+ */
+function categorized(): array
+{
+    $lock = readJson('composer.lock');
+    $out = [];
+    foreach (['packages' => 'runtime', 'packages-dev' => 'test'] as $section => $category) {
+        foreach ($lock[$section] as $p) {
+            $out[$p['name']] = ['version' => $p['version'], 'category' => $category];
+        }
+    }
+    ksort($out);
+    return $out;
+}
+
+/** The accounts Packagist lists as the package's maintainers (per package, not per version). */
+function maintainers(string $name): array
+{
+    $url = "https://packagist.org/packages/$name.json";
+    $context = stream_context_create(['http' => ['timeout' => 30, 'user_agent' => 'tadmor-php tools/vendor.php']]);
+    $text = @file_get_contents($url, false, $context);
+    if ($text === false) {
+        fail("cannot read $url");
+    }
+    $names = array_map(fn ($m) => 'packagist:' . $m['name'], json_decode($text, true)['package']['maintainers'] ?? []);
+    sort($names);
+    return $names;
+}
+
+function manifest(): void
+{
+    $packages = [];
+    $sources = ['runtime' => ['bytes' => 0, 'lines' => 0], 'test' => ['bytes' => 0, 'lines' => 0]];
+    $tracked = explode("\n", trim(shell_exec('git ls-files vendor') ?? ''));
+    foreach (categorized() as $name => $p) {
+        $packages[] = [
+            'ecosystem' => 'packagist', 'name' => $name, 'version' => $p['version'], 'category' => $p['category'],
+            'identities' => maintainers($name), 'evidence' => "https://packagist.org/packages/$name.json",
+        ];
+        foreach ($tracked as $file) {
+            if (str_starts_with($file, "vendor/$name/")) {
+                $sources[$p['category']]['bytes'] += filesize($file);
+                if (str_ends_with($file, '.php')) {
+                    $sources[$p['category']]['lines'] += count(array_filter(file($file), fn ($l) => trim($l) !== ''));
+                }
+            }
+        }
+    }
+    usort($packages, fn ($a, $b) => [$a['category'], $a['name']] <=> [$b['category'], $b['name']]);
+    $doc = [
+        'format' => 'tadmor-dependencies/1',
+        'generator' => 'tools/vendor.php manifest (tadmor-php)',
+        'platform' => 'linux/x64',
+        'toolchains' => ['PHP (the operating system\'s build)', 'Composer (the operating system\'s package)'],
+        'packages' => $packages,
+        'sources' => [
+            ['label' => 'Composer vendor/ (runtime)'] + $sources['runtime'],
+            ['label' => 'Composer vendor/ (test)'] + $sources['test'],
+        ],
+    ];
+    file_put_contents('dependencies.json', json_encode($doc, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n");
+    printf("vendor.php: wrote dependencies.json, %d packages\n", count($packages));
 }
 
 function check(): void
@@ -149,6 +225,19 @@ function check(): void
         $errors[] = "vendor/: $name is installed but not locked";
     }
 
+    if (!is_file('dependencies.json')) {
+        $errors[] = 'dependencies.json is missing; run `php tools/vendor.php manifest`';
+    } else {
+        $listed = [];
+        foreach (readJson('dependencies.json')['packages'] as $p) {
+            $listed[$p['name']] = ['version' => $p['version'], 'category' => $p['category']];
+        }
+        ksort($listed);
+        if ($listed !== categorized()) {
+            $errors[] = 'dependencies.json does not list the locked packages; run `php tools/vendor.php manifest`';
+        }
+    }
+
     if ($errors) {
         fail("check failed:\n  " . implode("\n  ", $errors));
     }
@@ -158,5 +247,6 @@ function check(): void
 match ($argv[1] ?? '') {
     'update' => update(),
     'check' => check(),
-    default => fail('usage: php tools/vendor.php update|check'),
+    'manifest' => manifest(),
+    default => fail('usage: php tools/vendor.php update|check|manifest'),
 };

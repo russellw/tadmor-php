@@ -114,6 +114,13 @@ deploy time, offline from the committed lock and `vendor/`).
 - **Pinned.** Exact versions in `composer.json` (no `^` or `~` ranges);
   `composer.lock` committed. A dependency change is reviewable as a lock
   diff plus a `vendor/` diff.
+- **Dependency manifest.** `php tools/vendor.php manifest` (which
+  `update` runs) writes `dependencies.json`, the manifest tadmor's
+  `tools/measure.py` reads (tadmor's `docs/counterpart-metrics.md`): every
+  locked package, its category (the runtime tree, or the dev tree, which
+  is test), and the accounts Packagist lists as its maintainers. `check`
+  also verifies that it lists exactly the locked packages. The figures in
+  this document are what `tools/measure.py ../tadmor-php` reports from it.
 - **No install-time code.** Composer always runs with `--no-scripts
   --no-plugins`, and `composer.json` sets `"allow-plugins": false`.
 - **Cooldown.** No version published less than 7 days ago, as tadmor's

@@ -27,7 +27,7 @@ The Content Security Policy forbids inline styles and scripts; use public/app.cs
 spec/, conformance/, and db/migrations/ are copies from tadmor (spec/UPSTREAM);
 never edit them here. Re-export from tadmor with spec/export.sh.
 Change dependencies only through `make vendor-update` (tools/vendor.php), never by
-running composer directly.
+running composer directly. It also rewrites dependencies.json; commit it with the lock and vendor/.
 Before committing, run `make check`, `make test`, and `make conformance`; all must pass.
 
 Version control:
