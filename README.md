@@ -42,6 +42,9 @@ make conformance  # tadmor's suite against a fresh server (wipes tadmor_php_conf
 make check        # lint, and verify vendor/ against composer.lock offline
 ```
 
+[`docs/ui-coverage.md`](docs/ui-coverage.md) records how each item of the UI
+checklist in `spec/domain.md` §13 was checked.
+
 Override connection strings on the command line, e.g.
 `make run DATABASE_URL=postgres://user:pass@host:5432/db?sslmode=disable`.
 
